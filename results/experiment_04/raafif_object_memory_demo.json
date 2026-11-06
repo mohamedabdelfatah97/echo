@@ -1,0 +1,44 @@
+{
+  "method": "minimum-total-3d-center-distance",
+  "note": "Masks were manually prompted; cross-frame association uses 3D positions only.",
+  "association_gate_m": 0.25,
+  "movement_threshold_m": 0.05,
+  "tracks": [
+    {
+      "id": "RAAFIF_001",
+      "xyz_m": [
+        -11.756639007308097,
+        23.486919613298102,
+        1.456237554550171
+      ],
+      "first_seen": "before",
+      "last_seen": "after",
+      "status": "STATIONARY",
+      "visible_pixels": 23791,
+      "delta_xyz_m": [
+        0.02259905079083424,
+        -0.00451980056668333,
+        -1.1920928955078125e-07
+      ],
+      "displacement_m": 0.023046598313493198
+    },
+    {
+      "id": "RAAFIF_002",
+      "xyz_m": [
+        -11.607485305005346,
+        23.495959222454655,
+        1.456237554550171
+      ],
+      "first_seen": "before",
+      "last_seen": "after",
+      "status": "MOVED",
+      "visible_pixels": 21416,
+      "delta_xyz_m": [
+        -0.1468937621601647,
+        0.002259912968650468,
+        -1.1920928955078125e-07
+      ],
+      "displacement_m": 0.14691114514633366
+    }
+  ]
+}

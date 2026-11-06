@@ -1,0 +1,242 @@
+[
+  {
+    "proposal_id": 0,
+    "area_pixels": 68721,
+    "bbox_xywh": [
+      16.0,
+      317.0,
+      495.0,
+      162.0
+    ],
+    "predicted_iou": 0.98828125,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 1,
+    "area_pixels": 42239,
+    "bbox_xywh": [
+      124.0,
+      45.0,
+      157.0,
+      270.0
+    ],
+    "predicted_iou": 0.96484375,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 2,
+    "area_pixels": 42237,
+    "bbox_xywh": [
+      124.0,
+      45.0,
+      314.0,
+      270.0
+    ],
+    "predicted_iou": 0.9609375,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 3,
+    "area_pixels": 33592,
+    "bbox_xywh": [
+      0.0,
+      44.0,
+      122.0,
+      427.0
+    ],
+    "predicted_iou": 0.96484375,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 4,
+    "area_pixels": 32887,
+    "bbox_xywh": [
+      0.0,
+      45.0,
+      121.0,
+      269.0
+    ],
+    "predicted_iou": 0.984375,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 5,
+    "area_pixels": 30121,
+    "bbox_xywh": [
+      0.0,
+      0.0,
+      639.0,
+      131.0
+    ],
+    "predicted_iou": 0.984375,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 6,
+    "area_pixels": 25301,
+    "bbox_xywh": [
+      449.0,
+      44.0,
+      157.0,
+      432.0
+    ],
+    "predicted_iou": 0.8125,
+    "selected_for_display": true
+  },
+  {
+    "proposal_id": 7,
+    "area_pixels": 25068,
+    "bbox_xywh": [
+      427.0,
+      45.0,
+      179.0,
+      270.0
+    ],
+    "predicted_iou": 0.9140625,
+    "selected_for_display": true
+  },
+  {
+    "proposal_id": 8,
+    "area_pixels": 10363,
+    "bbox_xywh": [
+      556.0,
+      142.0,
+      83.0,
+      337.0
+    ],
+    "predicted_iou": 0.91796875,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 9,
+    "area_pixels": 10355,
+    "bbox_xywh": [
+      609.0,
+      142.0,
+      30.0,
+      337.0
+    ],
+    "predicted_iou": 0.95703125,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 10,
+    "area_pixels": 10031,
+    "bbox_xywh": [
+      488.0,
+      114.0,
+      60.0,
+      170.0
+    ],
+    "predicted_iou": 0.828125,
+    "selected_for_display": true
+  },
+  {
+    "proposal_id": 11,
+    "area_pixels": 7499,
+    "bbox_xywh": [
+      517.0,
+      317.0,
+      86.0,
+      161.0
+    ],
+    "predicted_iou": 0.9453125,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 12,
+    "area_pixels": 6957,
+    "bbox_xywh": [
+      10.0,
+      317.0,
+      127.0,
+      76.0
+    ],
+    "predicted_iou": 0.84765625,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 13,
+    "area_pixels": 3892,
+    "bbox_xywh": [
+      428.0,
+      209.0,
+      53.0,
+      75.0
+    ],
+    "predicted_iou": 0.9140625,
+    "selected_for_display": true
+  },
+  {
+    "proposal_id": 14,
+    "area_pixels": 3879,
+    "bbox_xywh": [
+      495.0,
+      115.0,
+      52.0,
+      76.0
+    ],
+    "predicted_iou": 0.9375,
+    "selected_for_display": true
+  },
+  {
+    "proposal_id": 15,
+    "area_pixels": 3862,
+    "bbox_xywh": [
+      515.0,
+      317.0,
+      29.0,
+      161.0
+    ],
+    "predicted_iou": 0.94921875,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 16,
+    "area_pixels": 3793,
+    "bbox_xywh": [
+      498.0,
+      208.0,
+      50.0,
+      76.0
+    ],
+    "predicted_iou": 0.96484375,
+    "selected_for_display": true
+  },
+  {
+    "proposal_id": 17,
+    "area_pixels": 3616,
+    "bbox_xywh": [
+      276.0,
+      205.0,
+      55.0,
+      79.0
+    ],
+    "predicted_iou": 0.94140625,
+    "selected_for_display": true
+  },
+  {
+    "proposal_id": 18,
+    "area_pixels": 2466,
+    "bbox_xywh": [
+      30.0,
+      317.0,
+      86.0,
+      53.0
+    ],
+    "predicted_iou": 0.95703125,
+    "selected_for_display": false
+  },
+  {
+    "proposal_id": 19,
+    "area_pixels": 200,
+    "bbox_xywh": [
+      560.0,
+      467.0,
+      43.0,
+      4.0
+    ],
+    "predicted_iou": 0.86328125,
+    "selected_for_display": false
+  }
+]

@@ -1,0 +1,22 @@
+# Python environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Third-party repositories and downloaded checkpoints
+third_party/
+*.pt
+*.pth
+*.ckpt
+
+# Logs and temporary files
+*.log
+*.tmp
+.DS_Store
+
+# Old/incorrect test captures
+data/before_wrong_view_*/
+
+# Local scene recovery backups
+raafif_office_pre_recovery.usd
