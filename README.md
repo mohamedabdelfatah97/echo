@@ -1,6 +1,6 @@
-# RAAFIF
+# ECHO
 
-Revisit-Aware Association and Fusion of Instance Features
+Environmental Change and History of Objects
 
 An experimental system for persistent 3D object memory
 and environmental change detection using RGB-D observations.
