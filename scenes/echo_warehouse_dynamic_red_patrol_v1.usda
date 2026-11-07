@@ -1,0 +1,102 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    upAxis = "Z"
+    metersPerUnit = 1
+    subLayers = [
+        @echo_warehouse_nav_meters.usda@
+    ]
+)
+
+# Separate experimental layer. Main navigation robot and its ROS graphs are
+# inherited untouched. Do not add any ROS graph to the background actor.
+over "World"
+{
+    def Xform "ECHO_Dynamics"
+    {
+        custom string echo:scenario = "red_body_v2"
+        def Scope "Looks"
+        {
+            def Material "RedPaint"
+            {
+                token outputs:surface.connect = </World/ECHO_Dynamics/Looks/RedPaint/PreviewSurface.outputs:surface>
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    color3f inputs:diffuseColor = (0.77, 0.035, 0.045)
+                    float inputs:roughness = 0.58
+                    float inputs:metallic = 0.02
+                    token outputs:surface
+                }
+            }
+        }
+
+        def Xform "Robots"
+        {
+            def Xform "Red_Carter" (
+                prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/Robots/NVIDIA/NovaCarter/nova_carter.usd@
+                variants = {
+                    string Physics = "No_Physics"
+                    string Sensors = "None"
+                }
+            )
+            {
+                custom string echo:actor_id = "red_001"
+                custom string echo:actor_role = "background_agent"
+                double3 xformOp:translate = (2, -3, 0)
+                float3 xformOp:rotateXYZ = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+
+                # No root material: wheels, casters and sensor hardware retain
+                # NVIDIA's own bindings. The prior v1 root bind painted wheels.
+                # Instancing under 'chassis_link' is disabled locally for this
+                # actor so it is legal to override the referenced body meshes.
+                over "chassis_link" (
+                    instanceable = false
+                )
+                {
+                    over "visual" (
+                        instanceable = false
+                    )
+                    {
+                        over "top_body" (
+                            instanceable = false
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </World/ECHO_Dynamics/Looks/RedPaint> (
+                        bindMaterialAs = "strongerThanDescendants"
+                    )
+                    rel material:binding:full = </World/ECHO_Dynamics/Looks/RedPaint> (
+                        bindMaterialAs = "strongerThanDescendants"
+                    )
+                    rel material:binding:preview = </World/ECHO_Dynamics/Looks/RedPaint> (
+                        bindMaterialAs = "strongerThanDescendants"
+                    )
+                        }
+                        over "skirt" (
+                            instanceable = false
+                            prepend apiSchemas = ["MaterialBindingAPI"]
+                        )
+                        {
+                            rel material:binding = </World/ECHO_Dynamics/Looks/RedPaint> (
+                        bindMaterialAs = "strongerThanDescendants"
+                    )
+                    rel material:binding:full = </World/ECHO_Dynamics/Looks/RedPaint> (
+                        bindMaterialAs = "strongerThanDescendants"
+                    )
+                    rel material:binding:preview = </World/ECHO_Dynamics/Looks/RedPaint> (
+                        bindMaterialAs = "strongerThanDescendants"
+                    )
+                        }
+                    }
+                }
+            }
+        }
+
+        def Xform "Humans" {}
+        def Xform "Forklifts" {}
+        def Xform "MovableObjects" {}
+        def Xform "ExperimentMarkers" {}
+    }
+}
