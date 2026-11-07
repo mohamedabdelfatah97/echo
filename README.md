@@ -23,7 +23,7 @@ ECHO explores how a robot can recognize and remember objects in a 3D environment
 | Robot navigation | ROS 2 Jazzy, Nav2, AMCL, LiDAR, TF and odometry |
 | Computer vision | Python, OpenCV, NumPy |
 | Segmentation | SAM 2.1 (PyTorch/CUDA) |
-| Development machine | Ubuntu 24.04, NVIDIA RTX 5080 |
+| Development OS | Ubuntu 24.04, NVIDIA |
 
 ## Verified navigation baseline
 
