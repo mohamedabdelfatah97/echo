@@ -13,9 +13,9 @@ The long-term goal is to combine **3D perception, persistent memory, dynamic-age
 
 ## 🎥 Demo
 
-![ECHO Warehouse Demo](assets/echo_demo.gif)
+![ECHO Warehouse Navigation](assets/gifs/echo_warehouse_navigation.gif)
 
-*Nova Carter navigating NVIDIA's warehouse with ROS 2 Jazzy and Nav2 in Isaac Sim.*
+*Nova Carter autonomously navigating NVIDIA's warehouse using ROS 2 Jazzy, Nav2, and Isaac Sim 6.2.*
 
 ## 🛠️ Technology Stack
 
@@ -90,3 +90,4 @@ Key metrics include:
 *ECHO is a research prototype under active development.*
 
 **Verified navigation baseline:** `echo-nav-v1`
+
