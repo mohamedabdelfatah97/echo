@@ -1,0 +1,18 @@
+{
+  "description": "ECHO M03C: first conservative, deterministic red-Carter waypoint pilot",
+  "scene": "echo_warehouse_dynamic_red_patrol_v1.usda",
+  "actor_prim": "/World/ECHO_Dynamics/Robots/Red_Carter",
+  "armed": true,
+  "expected_start_xyz_m": [2.0, -3.0, 0.0],
+  "start_tolerance_m": 0.025,
+  "heading_mode": "hold_initial",
+  "max_linear_speed_mps": 0.08,
+  "max_angular_speed_degps": 15.0,
+  "max_leg_m": 0.25,
+  "max_total_distance_m": 0.5,
+  "require_return_to_start": true,
+  "waypoints": [
+    {"x": 2.0, "y": -2.8, "pause_s": 1.0},
+    {"x": 2.0, "y": -3.0, "pause_s": 0.0}
+  ]
+}
