@@ -13,7 +13,7 @@ source "$HOME/IsaacSim-ros_workspaces/jazzy_ws/install/local_setup.bash"
 export ROS_DOMAIN_ID=0
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
-SCENE="$HOME/echo/scenes/echo_warehouse_nav_meters.usda"
+SCENE="$HOME/echo/scenes/nav_baseline/navigation.usda"
 
 if [ ! -f "$SCENE" ]; then
     echo "ERROR: ECHO warehouse scene not found: $SCENE"
