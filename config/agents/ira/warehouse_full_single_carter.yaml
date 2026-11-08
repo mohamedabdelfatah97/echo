@@ -3,7 +3,7 @@ isaacsim.replicator.agent:
   seed: 12345
   simulation_duration: 30.0
   environment:
-    base_stage_asset_path: /home/m12/echo/scenes/echo_full_warehouse_stage_v1.usd
+    base_stage_asset_path: /home/m12/echo/scenes/full_warehouse/warehouse.usd
   robot:
     root_prim_path: /ECHO_IRA_Robots
     groups:
