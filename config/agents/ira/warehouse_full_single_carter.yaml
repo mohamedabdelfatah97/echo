@@ -1,0 +1,29 @@
+isaacsim.replicator.agent:
+  version: 1.7.0
+  seed: 12345
+  simulation_duration: 30.0
+  environment:
+    base_stage_asset_path: /home/m12/echo/scenes/full_warehouse/warehouse.usd
+  robot:
+    root_prim_path: /ECHO_IRA_Robots
+    groups:
+      echo_red_wanderer:
+        num: 1
+        spawn_positions:
+          - [-10.65539, -3.37954, 0.0]
+        spawn_orientations:
+          - 0.0
+        config_file_path: /home/m12/isaacsim/extscache/isaacsim.anim.robot.core-1.4.5+110.4.0.lx64/data/sample_configs/nova_carter.yaml
+        routines:
+        - wander:
+            weight: 1.0
+            repeat: 1
+            move:
+              distance_range:
+              - 2.0
+              - 4.0
+              navigation_areas: []
+            idle:
+              time_range:
+              - 2.0
+              - 5.0
