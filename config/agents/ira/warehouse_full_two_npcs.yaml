@@ -1,0 +1,27 @@
+isaacsim.replicator.agent:
+  version: 1.7.0
+  seed: 84621
+  simulation_duration: 30.0
+  environment:
+    base_stage_asset_path: /home/m12/echo/scenes/full_warehouse/main_robot_ros.usd
+  robot:
+    root_prim_path: /ECHO_IRA_Robots
+    groups:
+      echo_npc_carters:
+        num: 2
+        spawn_areas: []
+        agent_radius: 0.8
+        config_file_path: /home/m12/echo/config/agents/ira/carter_npc_red.yaml
+        routines:
+        - wander:
+            weight: 1.0
+            repeat: 1
+            move:
+              distance_range:
+              - 2.0
+              - 4.0
+              navigation_areas: []
+            idle:
+              time_range:
+              - 2.0
+              - 5.0

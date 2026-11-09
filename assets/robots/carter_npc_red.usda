@@ -1,0 +1,32 @@
+#usda 1.0
+(
+    defaultPrim = "Nova_Carter"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Nova_Carter" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/Samples/AnimRobot/nova_carter.usd@</nova_carter>
+)
+{
+    rel material:binding = </Nova_Carter/ECHO_Materials/Red> (
+        bindMaterialAs = "strongerThanDescendants"
+    )
+
+    def "ECHO_Materials"
+    {
+        def Material "Red"
+        {
+            token outputs:surface.connect = </Nova_Carter/ECHO_Materials/Red/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.9, 0.025, 0.025)
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+    }
+}
