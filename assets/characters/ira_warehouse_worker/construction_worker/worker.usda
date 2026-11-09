@@ -1,0 +1,12 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Root" (
+    references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/People/Characters/original_male_adult_construction_03/male_adult_construction_03.usd@
+)
+{
+}
