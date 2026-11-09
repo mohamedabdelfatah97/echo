@@ -29,4 +29,13 @@ def Xform "Nova_Carter" (
             }
         }
     }
+
+    over "chassis_link"
+    {
+        over "sensors" (
+            active = false
+        )
+        {
+        }
+    }
 }
