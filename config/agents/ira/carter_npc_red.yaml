@@ -1,0 +1,20 @@
+agent_name: Nova_Carter
+linear_velocity: 0.5
+angular_velocity: 30.0
+forward_vec: [1.0, 0.0, 0.0]
+joints:
+  - /chassis_link/wheel_right
+  - /chassis_link/wheel_left
+  - /chassis_link/caster_swivel_left
+  - /chassis_link/caster_swivel_right
+  - /chassis_link/caster_swivel_left/caster_wheel_left
+  - /chassis_link/caster_swivel_right/caster_wheel_right
+drive_base: differential
+path_planner: navmesh
+animation_paths:
+  turn_left: ${ext_path}/data/sample_animations/nova_carter/turn_left
+  turn_right: ${ext_path}/data/sample_animations/nova_carter/turn_right
+  forward: ${ext_path}/data/sample_animations/nova_carter/forward
+states: [idle, turn_left, turn_right, forward]
+asset_path: /home/m12/echo/assets/robots/carter_npc_red.usda
+radius: 0.6

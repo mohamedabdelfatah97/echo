@@ -20,3 +20,18 @@ data/before_wrong_view_*/
 
 # Local scene recovery backups
 raafif_office_pre_recovery.usd
+
+# ECHO cleanup reports
+/echo_cleanup_audit.txt
+
+# Generated robotics diagnostics
+/results/dynamic_scene_v1/
+/results/m00_audit/
+/results/m01_sensor_audit/
+/results/m04_ira_setup_check.txt
+/results/m04_navmesh_audit.txt
+/results/red_patrol_v1/
+/results/red_waypoint_v1/
+
+# Local USD recovery backups
+/scenes/backups/
