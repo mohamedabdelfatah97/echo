@@ -11,7 +11,16 @@ Rather than treating each sensor observation independently, ECHO aims to maintai
 
 The long-term goal is to combine **3D perception, persistent memory, dynamic-agent tracking, and motion prediction** to support more informed autonomous navigation.
 
-## 🎥 Demo
+## 🎥 Demos
+
+### Dynamic Warehouse — Multiple Robots and Human Worker
+
+![ECHO Dynamic Warehouse](assets/gifs/echo_full_warehouse_dynamic_agents.gif)
+
+*Isaac Sim 6.2 warehouse featuring the main ROS-enabled Nova Carter, two red autonomous NPC robots, and an animated warehouse worker using NVIDIA Replicator Agent.*
+
+### Autonomous Navigation — ROS 2 Nav2
+
 
 ![ECHO Warehouse Navigation](assets/gifs/echo_warehouse_navigation.gif)
 
@@ -52,7 +61,7 @@ The long-term goal is to combine **3D perception, persistent memory, dynamic-age
 
 **📍 Current Focus — Milestone 04**
 
-An additional Nova Carter has spawned and moved autonomously using NVIDIA Replicator Agent. Static-obstacle avoidance, sensor visibility, and more complex multi-agent scenarios are still being validated.
+The dynamic warehouse now includes two red Nova Carter NPCs and an animated warehouse worker alongside the main ROS-enabled Nova Carter. Human loading and visible movement have been verified. Ground-truth motion logging, sensor visibility, and multi-agent navigation testing are next.
 
 ## ▶️ Getting Started
 
