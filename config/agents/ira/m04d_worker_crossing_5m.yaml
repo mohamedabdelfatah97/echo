@@ -1,0 +1,31 @@
+isaacsim.replicator.agent:
+  version: 1.7.0
+  seed: 84621
+  simulation_duration: 45.0
+  environment:
+    base_stage_asset_path: /home/m12/echo/scenes/full_warehouse/main_robot_ros.usd
+  character:
+    root_prim_path: /World/ECHO_Humans
+    groups:
+      warehouse_worker:
+        num: 1
+        asset_path: /home/m12/echo/assets/characters/ira_warehouse_worker/
+        spawn_areas: []
+        routines:
+        - patrol:
+            weight: 1.0
+            repeat: 20
+            speed_range:
+            - 0.8
+            - 0.8
+            path_points:
+            - &id001
+              - -22.27
+              - -2.28
+              - 0.0
+            - - -22.4
+              - -6.28
+              - 0.0
+            - *id001
+        spawn_positions:
+        - *id001
