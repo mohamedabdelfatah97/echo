@@ -35,3 +35,7 @@ raafif_office_pre_recovery.usd
 
 # Local USD recovery backups
 /scenes/backups/
+
+# ECHO M04B generated diagnostics and recordings
+/diagnostics/
+/results/m04_ground_truth/

@@ -6,6 +6,8 @@ Read-only: does not modify any actors or USD assets.
 
 import asyncio
 import csv
+import hashlib
+import subprocess
 import json
 import math
 from datetime import datetime, timezone
@@ -13,6 +15,7 @@ from pathlib import Path
 
 import omni.kit.app
 import omni.timeline
+import omni.usd
 from omni.metropolis.pipeline.agent import AgentsManager
 
 ROOT = Path.home() / "echo"
@@ -92,6 +95,7 @@ async def echo_log_ira_ground_truth():
             return None
 
     previous = {}
+    sample_times = []
     sample_count = 0
     row_count = 0
 
@@ -123,6 +127,7 @@ async def echo_log_ira_ground_truth():
             last_time = t
             end_time = t
             sample_count += 1
+            sample_times.append(t)
 
             for actor_id, prim_path, kind, index, agent in identities:
                 p = agent.get_world_position()
@@ -220,7 +225,64 @@ async def echo_log_ira_ground_truth():
             if t - start_time >= DURATION_S:
                 break
 
+    intervals = [
+        b - a for a, b in zip(sample_times, sample_times[1:])
+    ]
+
+    actual_rate = (
+        (len(sample_times) - 1) /
+        (sample_times[-1] - sample_times[0])
+        if len(sample_times) > 1
+        and sample_times[-1] > sample_times[0]
+        else None
+    )
+
+    try:
+        git_revision = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=ROOT,
+            text=True,
+            stderr=subprocess.DEVNULL
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        git_revision = None
+
+    config_path = ROOT / (
+        "config/agents/ira/"
+        "warehouse_two_npcs_one_human.yaml"
+    )
+
+    config_hash = (
+        hashlib.sha256(config_path.read_bytes()).hexdigest()
+        if config_path.is_file() else None
+    )
+
+    stage = omni.usd.get_context().get_stage()
+    scene_root = (
+        str(stage.GetRootLayer().identifier)
+        if stage else None
+    )
+
     metadata = {
+        "schema_version": 1,
+        "source": "IRA runtime simulator ground truth",
+        "git_commit": git_revision,
+        "scene_root_layer": scene_root,
+        "config_sha256": config_hash,
+        "actual_rate_hz": actual_rate,
+        "first_sample_sim_time_s": (
+            sample_times[0] if sample_times else None
+        ),
+        "last_sample_sim_time_s": (
+            sample_times[-1] if sample_times else None
+        ),
+        "sample_interval_min_s": (
+            min(intervals) if intervals else None
+        ),
+        "sample_interval_max_s": (
+            max(intervals) if intervals else None
+        ),
+        "rotation_convention": "xyzw",
         "experiment": "ECHO_M04B",
         "run_id": run_id,
         "target_rate_hz": RATE_HZ,
@@ -237,7 +299,10 @@ async def echo_log_ira_ground_truth():
         ),
         "notes": (
             "IRA simulator ground truth. Actor IDs are "
-            "per-run; rotation convention unvalidated."
+            "reproducible in the current scene across tested restarts. "
+            "Robot quaternion XYZW convention verified; human visual "
+            "facing-axis offset remains uncalibrated. Reported speed "
+            "may differ from velocity measured from positions."
         ),
     }
 
