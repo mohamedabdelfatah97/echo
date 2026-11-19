@@ -1,0 +1,14 @@
+{
+  "camera": "/World/Nova_Carter_ROS/chassis_link/sensors/echo_d455_front/RSD455/Camera_Pseudo_Depth",
+  "resolution": [
+    640,
+    480
+  ],
+  "valid_fraction": 1.0,
+  "min_depth_m": 0.45524442195892334,
+  "median_depth_m": 9.274706840515137,
+  "max_depth_m": 9.554312705993652,
+  "center_depth_m": 9.554308891296387,
+  "depth_type": "distance_to_image_plane",
+  "sensor_postprocessing": "not validated"
+}

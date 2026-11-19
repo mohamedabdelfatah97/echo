@@ -1,0 +1,16 @@
+{
+  "resolution": [
+    640,
+    480
+  ],
+  "camera_baseline_m": 0.01150000000000007,
+  "approx_rgb_fx_pixels": 317.0431199837856,
+  "reference_valid_fraction": 1.0,
+  "native_valid_fraction": 1.0,
+  "median_same_pixel_depth_difference_m": 0.0,
+  "p95_same_pixel_depth_difference_m": 2.384185791015625e-07,
+  "approx_parallax_pixels_at_1m": 3.645995879813556,
+  "approx_parallax_pixels_at_2m": 1.822997939906778,
+  "approx_parallax_pixels_at_9m": 0.4051106533126173,
+  "note": "Same-pixel depth differences measure viewpoint disagreement, not sensor accuracy. RGB/depth captures requested in the same render step; ROS timestamp synchronization not yet verified."
+}
