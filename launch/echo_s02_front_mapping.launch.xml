@@ -1,0 +1,43 @@
+<launch>
+  <arg name="database_path"/>
+
+  <!-- Register simulated D455 depth into the RGB optical frame -->
+  <node pkg="depth_image_proc"
+        exec="register_node"
+        name="echo_s02_depth_register"
+        output="screen">
+    <param name="use_sim_time" value="true"/>
+    <remap from="depth/image_rect"
+           to="/echo/cameras/front/depth/image_raw"/>
+    <remap from="depth/camera_info"
+           to="/echo/cameras/front/depth/camera_info"/>
+    <remap from="rgb/camera_info"
+           to="/echo/cameras/front/color/camera_info"/>
+    <remap from="depth_registered/image_rect"
+           to="/echo/cameras/front/depth_registered/image_rect"/>
+  </node>
+
+  <!-- RTAB-Map using the existing robot odometry -->
+  <include file="$(find-pkg-share rtabmap_launch)/launch/rtabmap.launch.py">
+    <arg name="namespace" value="echo_s02_route"/>
+    <arg name="frame_id" value="base_link"/>
+    <arg name="odom_topic" value="/chassis/odom"/>
+    <arg name="visual_odometry" value="false"/>
+    <arg name="icp_odometry" value="false"/>
+
+    <arg name="rgb_topic" value="/echo/cameras/front/color/image_raw"/>
+    <arg name="depth_topic" value="/echo/cameras/front/depth_registered/image_rect"/>
+    <arg name="camera_info_topic" value="/echo/cameras/front/color/camera_info"/>
+
+    <arg name="rgbd_sync" value="true"/>
+    <arg name="approx_rgbd_sync" value="false"/>
+    <arg name="approx_sync" value="false"/>
+    <arg name="qos" value="2"/>
+
+    <arg name="use_sim_time" value="true"/>
+    <arg name="publish_tf_map" value="false"/>
+    <arg name="rtabmap_viz" value="false"/>
+    <arg name="rviz" value="false"/>
+    <arg name="database_path" value="$(var database_path)"/>
+  </include>
+</launch>
