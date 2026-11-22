@@ -1,0 +1,32 @@
+#usda 1.0
+(
+    metersPerUnit = 1
+    upAxis = "Z"
+    subLayers = [
+        @s01_d455_four_centered_probe.usda@
+    ]
+)
+
+over "World"
+{
+    over "Nova_Carter_ROS"
+    {
+        over "chassis_link"
+        {
+            over "sensors"
+            {
+                over "right_owl" (
+                    active = false
+                )
+                {
+                }
+
+                over "left_owl" (
+                    active = false
+                )
+                {
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+#usda 1.0
+(
+    metersPerUnit = 1
+    upAxis = "Z"
+    subLayers = [
+        @s01_d455_front_rear_ros.usda@
+    ]
+)
+
+over "World"
+{
+    over "Nova_Carter_ROS"
+    {
+        over "chassis_link"
+        {
+            over "sensors"
+            {
+                over "back_hawk" (
+                    active = false
+                )
+                {
+                }
+
+                over "echo_d455_rear"
+                {
+                    double3 xformOp:translate = (-0.5837, 0, 0.3439)
+                }
+            }
+        }
+    }
+}
