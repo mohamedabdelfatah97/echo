@@ -2,6 +2,7 @@
 """ECHO S01: publish native depth CameraInfo from verified intrinsics."""
 
 from copy import deepcopy
+import os
 
 import rclpy
 from rclpy.node import Node
@@ -15,6 +16,10 @@ class DepthCameraInfoRelay(Node):
     def __init__(self):
         super().__init__("echo_d455_rear_depth_camera_info")
 
+        self.depth_cy_mode = os.environ.get("ECHO_S03_DEPTH_CY_MODE", "baseline").strip().lower()
+        if self.depth_cy_mode not in ("baseline", "corrected"):
+            raise ValueError("ECHO_S03_DEPTH_CY_MODE must be baseline or corrected")
+        print(f"[ECHO S03-D5] {PREFIX} depth CameraInfo mode={self.depth_cy_mode}", flush=True)
         self.calibration = None
         self.published = 0
 
@@ -65,6 +70,12 @@ class DepthCameraInfoRelay(Node):
 
         info = deepcopy(self.calibration)
         info.header = deepcopy(depth.header)
+
+        # Simulated renderer-native depth uses a pixel-center convention
+        # consistent with cy=239.5. Opt-in only; RGB CameraInfo is untouched.
+        if self.depth_cy_mode == "corrected":
+            info.k[5] = 239.5
+            info.p[6] = 239.5
 
         self.publisher.publish(info)
         self.published += 1
