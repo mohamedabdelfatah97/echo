@@ -8,7 +8,7 @@ ECHO is an independent robotics R&D project exploring how a robot can map an env
 
 **Research goals:** (1) measure how one versus four simulated D455-style RGB-D cameras perform in mapping and unknown-start relocalization, retaining the existing 3D LiDAR as a separate reference; (2) build a persistent object-centric memory that recognizes moved, appeared and removed objects while refusing to equate an unseen object with a removed one. Dynamic tracking and possible Nav2 integration are later extensions.
 
-> **Current state — 20 November 2026:** The navigation baseline and Phase B dynamic-agent/sensor experiments are complete at their defined scope. A **front simulated D455-like** RGB-D pipeline is implemented and validated on development branch `echo/s01-d455` (`5b40f2b`), and a **preliminary** front RGB-D/3D-LiDAR mapping comparison was reported on 19 Nov. Next: preserve that baseline, add rear, left and right RGB-D views, then test **one** RTAB-Map instance consuming four views. Four-camera mapping and unknown-pose relocalization are **not yet demonstrated**. The current public `main` branch may not yet contain the local S01/S02 work described here.
+> **Current state — 27 November 2026:** Phase C is complete at its engineering scope. Four simulated D455-style RGB-D cameras feed one synchronized RTAB-Map instance. Coupled XY calibration, concurrent NAV-0 navigation and preliminary 3D mapping have been validated. Next: S04 controlled sensor comparison.
 
 ## Demos
 
@@ -24,6 +24,18 @@ Isaac Sim warehouse with the main ROS Nova Carter, mobile NPC Nova Carters and a
 
 Previously verified white Nova Carter localization and autonomous navigation in a preserved warehouse reference scene.
 
+
+### Four-camera RGB-D mapping — Phase C
+
+![ECHO four-camera reconstruction](docs/evidence/s03_d8/native_viewer.png)
+
+Three successful navigation goals, 113 stored RGB-D observations,
+452 verified camera models and nine retained graph locations.
+
+Repeated human-shaped returns illustrate the dynamic-object ghosting
+problem that motivates ECHO. Persistent object tracking and global
+relocalization remain research objectives.
+
 ## Research and status
 
 | Work package | Status | Evidence / caveat |
@@ -32,11 +44,12 @@ Previously verified white Nova Carter localization and autonomous navigation in 
 | M03 — Office RGB-D/object prototypes | Early experiments | Tracked `raafif_office*.usd`, `data/before`, `data/after`, `results/experiment_01`–`05`; not a mobile persistent-memory validation |
 | M04C — Dynamic agents | Complete at scope | Two red NPC robots, two animated workers, simulator GT |
 | M04D — Worker sensor visibility | Complete at scope | RGB visibility and GT-gated 3D LiDAR evidence; not independent detection/tracking |
-| S01-A/B — Front simulated D455 | Validated in local development branch | RGB, depth, CameraInfo, TF and XYZ cloud |
-| S02 — Front D455 / 3D LiDAR | Preliminary prior-session experiment | RTAB-Map map/point-cloud comparison; S02 launch/analysis files untracked on 20 Nov |
-| **S01-C — Rear, left and right** | **Next** | Isolated derived scene, validated streams and calibration |
-| S01-D — One four-camera RTAB-Map map | Planned | One mapping process and one shared database; not four independent maps |
-| R01/R02 — Sensor and relocalization evaluation | Planned | One D455 vs four D455s vs 3D LiDAR; matched controlled runs and independent GT |
+| S01-A/B — Front simulated D455 | Validated | RGB, depth, CameraInfo, TF and XYZ cloud |
+| S02 — Front D455 / 3D LiDAR | Preliminary baseline | Historical mapping comparison; not a controlled sensor ranking |
+| S01-C — Rear, left and right | Completed | Four validated RGB-D pipelines |
+| S01-D / S03 — Four-camera RTAB-Map | Completed at scope | One synchronized mapping instance, concurrent NAV-0 and native 3D visualization |
+| **S04 / R01 — Controlled sensor comparison** | **Next** | One D455 vs four D455s vs 3D LiDAR |
+| R02 — Global relocalization | Planned | Unknown-start and revisit localization |
 | M05+ — Revisit events and object memory | Planned | Object change GT → association → occlusion-aware evidence → optional tracking/Nav2 |
 
 The preliminary S02 geometrical correspondence figures are **not** depth-calibration accuracy or relocalization success. See the dedicated report for interpretation limits.
@@ -47,8 +60,8 @@ The preliminary S02 geometrical correspondence figures are **not** depth-calibra
 |---|---|
 | Simulator / compute | NVIDIA Isaac Sim 6.2, Ubuntu 24.04, RTX 5080 |
 | Robot & middleware | White ROS-enabled Nova Carter, ROS 2 Jazzy, TF, odometry, Nav2, RViz2 |
-| Sensors | Existing 3D LiDAR; front simulated D455-like RGB-D; three additional RGB-D views planned |
-| Mapping | AMCL/navigation baseline; front RGB-D RTAB-Map in preliminary S02 trials |
+| Sensors | Existing 3D LiDAR and four simulated D455-style RGB-D cameras |
+| Mapping | Preserved navigation baseline; NAV-0 and four-camera RTAB-Map |
 | Perception prototypes | Python, OpenCV, SAM 2.1, PyTorch; early office object-association experiments |
 | Reproducibility | Versioned USD scenes/scripts/configuration, simulator GT, ROS recordings and quantitative analysis |
 
@@ -75,6 +88,10 @@ bash scripts/start_echo_d455_front_stack.sh
 ```
 
 The S01 report notes that reuse of an already running Isaac Sim instance was tested; full cold-start/shutdown behavior was not established. The 3D LiDAR and original scenes must remain preserved.
+
+## Phase C report and reproduction instructions
+
+[Read the final Phase C technical report](docs/ECHO_PHASE_C_CLOSEOUT_20261127.md).
 
 ## Documentation
 
