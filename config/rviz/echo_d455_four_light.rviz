@@ -1,0 +1,371 @@
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 70
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+        - /Grid1
+        - /PointCloud2_Right_D4551
+        - /PointCloud2_Left_D4551
+      Splitter Ratio: 0.3786407709121704
+    Tree Height: 1863
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        RSD455:
+          Value: true
+        XT_32:
+          Value: true
+        back_2d_lidar:
+          Value: true
+        back_fisheye_camera:
+          Value: true
+        back_fisheye_camera_optical:
+          Value: true
+        back_stereo_camera:
+          Value: true
+        base_link:
+          Value: true
+        caster_swivel_left:
+          Value: true
+        caster_swivel_right:
+          Value: true
+        caster_wheel_left:
+          Value: true
+        caster_wheel_right:
+          Value: true
+        chassis_imu:
+          Value: true
+        echo_d455_front_color_optical_frame:
+          Value: true
+        echo_d455_front_depth_optical_frame:
+          Value: true
+        echo_d455_left_color_optical_frame:
+          Value: true
+        echo_d455_left_depth_optical_frame:
+          Value: true
+        echo_d455_left_link:
+          Value: true
+        echo_d455_rear_color_optical_frame:
+          Value: true
+        echo_d455_rear_depth_optical_frame:
+          Value: true
+        echo_d455_rear_link:
+          Value: true
+        echo_d455_right_color_optical_frame:
+          Value: true
+        echo_d455_right_depth_optical_frame:
+          Value: true
+        echo_d455_right_link:
+          Value: true
+        front_2d_lidar:
+          Value: true
+        front_3d_lidar:
+          Value: true
+        front_RPLidar:
+          Value: true
+        front_fisheye_camera:
+          Value: true
+        front_fisheye_camera_optical:
+          Value: true
+        front_stereo_camera:
+          Value: true
+        left_fisheye_camera:
+          Value: true
+        left_stereo_camera:
+          Value: true
+        nova_carter:
+          Value: true
+        nova_carter_caster_frame_base:
+          Value: true
+        odom:
+          Value: true
+        rear_RPLidar:
+          Value: true
+        right_fisheye_camera:
+          Value: true
+        right_stereo_camera:
+          Value: true
+        wheel_left:
+          Value: true
+        wheel_right:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        odom:
+          base_link:
+            XT_32:
+              front_3d_lidar:
+                {}
+            back_fisheye_camera:
+              back_fisheye_camera_optical:
+                {}
+            back_stereo_camera:
+              {}
+            chassis_imu:
+              {}
+            front_RPLidar:
+              front_2d_lidar:
+                {}
+            front_fisheye_camera:
+              front_fisheye_camera_optical:
+                {}
+            front_stereo_camera:
+              {}
+            left_fisheye_camera:
+              {}
+            left_stereo_camera:
+              {}
+            nova_carter:
+              RSD455:
+                echo_d455_front_color_optical_frame:
+                  {}
+                echo_d455_front_depth_optical_frame:
+                  {}
+              caster_swivel_left:
+                {}
+              caster_swivel_right:
+                {}
+              caster_wheel_left:
+                {}
+              caster_wheel_right:
+                {}
+              echo_d455_left_link:
+                echo_d455_left_color_optical_frame:
+                  {}
+                echo_d455_left_depth_optical_frame:
+                  {}
+              echo_d455_rear_link:
+                echo_d455_rear_color_optical_frame:
+                  {}
+                echo_d455_rear_depth_optical_frame:
+                  {}
+              echo_d455_right_link:
+                echo_d455_right_color_optical_frame:
+                  {}
+                echo_d455_right_depth_optical_frame:
+                  {}
+              nova_carter_caster_frame_base:
+                {}
+              wheel_left:
+                {}
+              wheel_right:
+                {}
+            rear_RPLidar:
+              back_2d_lidar:
+                {}
+            right_fisheye_camera:
+              {}
+            right_stereo_camera:
+              {}
+      Update Interval: 0
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2_Front_D455
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /echo/cameras/front/depth/points
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2_Rear_D455
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /echo/cameras/rear/depth/points
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2_Right_D455
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /echo/cameras/right/depth/points
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2_Left_D455
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /echo/cameras/left/depth/points
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: base_link
+    Frame Rate: 15
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 60.43764877319336
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: -1.6173762083053589
+        Y: -2.7254011631011963
+        Z: 3.0708045959472656
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.7853981852531433
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 0.7853981852531433
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 2091
+  Hide Left Dock: false
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd00000001000000000000026c000007cdfc0200000001fb000000100044006900730070006c006100790073010000003f000007cd000000cc00ffffff00000c8e000007cd00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 3840
+  X: 0
+  Y: 32

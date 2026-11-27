@@ -1,102 +1,117 @@
-
 # ECHO
 
 ### **E**nvironmental **C**hange and **H**istory of **O**bjects
 
-**Persistent 3D Semantic Object Memory & Environmental Change Detection for Mobile Robots**
+**Persistent 3D Object Memory, Multi-View Relocalization and Environmental Change Detection for Mobile Robots**
 
-ECHO is a robotics research project exploring how autonomous mobile robots can **perceive, remember, and understand changes in their environment over time**.
+ECHO is an independent robotics R&D project exploring how a robot can map an environment, recover its location on a later visit, remember individual objects, and distinguish true environmental changes from limited or occluded observations. It uses NVIDIA Isaac Sim 6.2, ROS 2 Jazzy, Nav2, RTAB-Map and a ROS-enabled Nova Carter in a dynamic warehouse.
 
-Rather than treating each sensor observation independently, ECHO aims to maintain a persistent 3D object-centric world model that recognizes previously seen objects, detects when they appear, disappear, or move, and distinguishes temporary occlusions from genuine changes.
+**Research goals:** (1) measure how one versus four simulated D455-style RGB-D cameras perform in mapping and unknown-start relocalization, retaining the existing 3D LiDAR as a separate reference; (2) build a persistent object-centric memory that recognizes moved, appeared and removed objects while refusing to equate an unseen object with a removed one. Dynamic tracking and possible Nav2 integration are later extensions.
 
-The long-term goal is to combine **3D perception, persistent memory, dynamic-agent tracking, and motion prediction** to support more informed autonomous navigation.
+> **Current state — 27 November 2026:** Phase C is complete at its engineering scope. Four simulated D455-style RGB-D cameras feed one synchronized RTAB-Map instance. Coupled XY calibration, concurrent NAV-0 navigation and preliminary 3D mapping have been validated. Next: S04 controlled sensor comparison.
 
-## 🎥 Demos
+## Demos
 
-### Dynamic Warehouse — Multiple Robots and Human Worker
+### Dynamic warehouse — NPC robots and warehouse workers
 
 ![ECHO Dynamic Warehouse](assets/gifs/echo_full_warehouse_dynamic_agents.gif)
 
-*Isaac Sim 6.2 warehouse featuring the main ROS-enabled Nova Carter, two red autonomous NPC robots, and an animated warehouse worker using NVIDIA Replicator Agent.*
+Isaac Sim warehouse with the main ROS Nova Carter, mobile NPC Nova Carters and animated workers. The completed M04C scenario verified two independently moving red NPCs, two workers, four distinct actor IDs and 10 Hz simulation ground-truth trajectories.
 
-### Autonomous Navigation — ROS 2 Nav2
-
+### Autonomous navigation — ROS 2 Nav2
 
 ![ECHO Warehouse Navigation](assets/gifs/echo_warehouse_navigation.gif)
 
-*Nova Carter autonomously navigating NVIDIA's warehouse using ROS 2 Jazzy, Nav2, and Isaac Sim 6.2.*
+Previously verified white Nova Carter localization and autonomous navigation in a preserved warehouse reference scene.
 
-## 🛠️ Technology Stack
 
-| Component | Technology |
-| --- | --- |
-| Simulation | NVIDIA Isaac Sim 6.2 |
-| Robotics | Nova Carter, ROS 2 Jazzy, Nav2 |
-| Perception | Python, OpenCV, SAM 2.1 |
-| Deep Learning | PyTorch, CUDA |
-| Localization | AMCL, LiDAR, Odometry, TF |
-| Development | Ubuntu 24.04, Git |
+### Four-camera RGB-D mapping — Phase C
 
-## 🎯 Research Objectives
+![ECHO four-camera reconstruction](docs/evidence/s03_d8/native_viewer.png)
 
-- **Persistent 3D Memory:** Maintain object identities, locations, and observation histories across visits.
-- **Environmental Change Detection:** Identify added, removed, relocated, and unchanged objects.
-- **Dynamic Scene Understanding:** Track moving robots and humans while reasoning about occlusion.
-- **Motion & Route Analysis:** Assess whether environmental changes or moving agents may affect planned paths.
-- **Navigation Integration:** Investigate object-aware obstacle updating and clearing for Nav2.
+Three successful navigation goals, 113 stored RGB-D observations,
+452 verified camera models and nine retained graph locations.
 
-## 🚀 Development Milestones
+Repeated human-shaped returns illustrate the dynamic-object ghosting
+problem that motivates ECHO. Persistent object tracking and global
+relocalization remain research objectives.
 
-| Milestone | Status |
-| --- | --- |
-| 01 — Isaac Sim warehouse and Nova Carter setup | ✅ Complete |
-| 02 — ROS 2 Nav2 autonomous navigation | ✅ Complete |
-| 03 — Fixed-camera RGB-D perception and object association prototypes | ✅ Complete |
-| 04 — Multi-robot warehouse and autonomous background agents | 🚧 **In Progress** |
-| 05 — Moving-robot 3D perception and localization | ⏳ Planned |
-| 06 — Persistent object memory and revisit-aware change detection | ⏳ Planned |
-| 07 — Dynamic-agent tracking and motion prediction | ⏳ Planned |
-| 08 — Route-impact analysis and Nav2 integration | ⏳ Planned |
-| 09 — Quantitative evaluation and research paper | ⏳ Planned |
+## Research and status
 
-**📍 Current Focus — Milestone 04**
+| Work package | Status | Evidence / caveat |
+|---|---|---|
+| M01–M02 — Isaac warehouse and Nav2 | Completed baseline | Preserved navigation scene and launcher |
+| M03 — Office RGB-D/object prototypes | Early experiments | Tracked `raafif_office*.usd`, `data/before`, `data/after`, `results/experiment_01`–`05`; not a mobile persistent-memory validation |
+| M04C — Dynamic agents | Complete at scope | Two red NPC robots, two animated workers, simulator GT |
+| M04D — Worker sensor visibility | Complete at scope | RGB visibility and GT-gated 3D LiDAR evidence; not independent detection/tracking |
+| S01-A/B — Front simulated D455 | Validated | RGB, depth, CameraInfo, TF and XYZ cloud |
+| S02 — Front D455 / 3D LiDAR | Preliminary baseline | Historical mapping comparison; not a controlled sensor ranking |
+| S01-C — Rear, left and right | Completed | Four validated RGB-D pipelines |
+| S01-D / S03 — Four-camera RTAB-Map | Completed at scope | One synchronized mapping instance, concurrent NAV-0 and native 3D visualization |
+| **S04 / R01 — Controlled sensor comparison** | **Next** | One D455 vs four D455s vs 3D LiDAR |
+| R02 — Global relocalization | Planned | Unknown-start and revisit localization |
+| M05+ — Revisit events and object memory | Planned | Object change GT → association → occlusion-aware evidence → optional tracking/Nav2 |
 
-The dynamic warehouse now includes two red Nova Carter NPCs and an animated warehouse worker alongside the main ROS-enabled Nova Carter. Human loading and visible movement have been verified. Ground-truth motion logging, sensor visibility, and multi-agent navigation testing are next.
+The preliminary S02 geometrical correspondence figures are **not** depth-calibration accuracy or relocalization success. See the dedicated report for interpretation limits.
 
-## ▶️ Getting Started
+## Technology stack
 
-**1. Start Isaac Sim**
+| Area | Current technology |
+|---|---|
+| Simulator / compute | NVIDIA Isaac Sim 6.2, Ubuntu 24.04, RTX 5080 |
+| Robot & middleware | White ROS-enabled Nova Carter, ROS 2 Jazzy, TF, odometry, Nav2, RViz2 |
+| Sensors | Existing 3D LiDAR and four simulated D455-style RGB-D cameras |
+| Mapping | Preserved navigation baseline; NAV-0 and four-camera RTAB-Map |
+| Perception prototypes | Python, OpenCV, SAM 2.1, PyTorch; early office object-association experiments |
+| Reproducibility | Versioned USD scenes/scripts/configuration, simulator GT, ROS recordings and quantitative analysis |
 
-```bash
-~/echo/scripts/start_echo_sim.sh
-```
+Simulated D455-style rendering does not reproduce or validate the physical D455's active stereo, optical limitations, IR interference, noise, USB bandwidth, timing or hardware extrinsics. The algorithmic RGB-D interfaces should transfer; synthetic camera parameters should not.
 
-**2. Start Nav2 and RViz**
+## Getting started — preserved navigation demo
 
 ```bash
-~/echo/scripts/start_echo_nav.sh
+cd ~/echo
+bash scripts/start_echo_sim.sh
+# In another terminal after simulation startup:
+bash scripts/start_echo_nav.sh
 ```
 
-Use **Nav2 Goal** in RViz to send an autonomous navigation goal.
+Use **Nav2 Goal** in RViz for the existing single-robot navigation reference. These are not commands to launch the four-camera experiment.
 
-These commands launch the verified single-robot navigation baseline. Dynamic-agent experiments use separate scenes and configurations.
+The front-D455 development stack, which **requires files from the S01 branch**, was previously started with:
 
-## 🔬 Research & Evaluation
+```bash
+cd ~/echo
+bash scripts/start_echo_d455_front_stack.sh
+# In Isaac Sim, open scenes/s01_d455/s01_d455_front_ros_depth_raw_verified.usda
+# and press Play. Inspect script/scene dependencies before a new run.
+```
 
-ECHO will be evaluated using controlled environmental changes, repeated robot visits, and randomized dynamic-agent scenarios.
+The S01 report notes that reuse of an already running Isaac Sim instance was tested; full cold-start/shutdown behavior was not established. The 3D LiDAR and original scenes must remain preserved.
 
-Key metrics include:
+## Phase C report and reproduction instructions
 
-- 3D object localization error
-- Object association accuracy
-- Change-detection precision and recall
-- Tracking and motion-prediction errors
-- Obstacle-clearing latency
-- Navigation and route-impact performance
+[Read the final Phase C technical report](docs/ECHO_PHASE_C_CLOSEOUT_20261127.md).
+
+## Documentation
+
+| Start here | Purpose |
+|---|---|
+| [`docs/ECHO_MASTER_PLAN.md`](docs/ECHO_MASTER_PLAN.md) | Full research roadmap, milestones, work-package gates, scientific claims and dependency ordering |
+| [`docs/ECHO_ARCHITECTURE.md`](docs/ECHO_ARCHITECTURE.md) | Current vs proposed ROS/Isaac interfaces, camera/TF contract and system architecture |
+| [`docs/ECHO_EXPERIMENT_PROTOCOL.md`](docs/ECHO_EXPERIMENT_PROTOCOL.md) | Controlled one-D455/four-D455/3D-LiDAR mapping, unknown-start relocalization and object-change evaluations |
+| [`docs/echo_phase_b_m04c_m04d.md`](docs/echo_phase_b_m04c_m04d.md) | Completed dynamic-warehouse Phase B measurements and limitations |
+| [`docs/echo_s01_front_d455.md`](docs/echo_s01_front_d455.md) | Dated 19 Nov front D455 implementation, exact synthetic intrinsics/optical TF, QoS and throughput |
+| [`docs/echo_s02_preliminary_comparison.md`](docs/echo_s02_preliminary_comparison.md) | Reported 19 Nov front RGB-D RTAB-Map and 3D LiDAR comparison, with important methodological caveats |
+
+The S01 front report is a **historical checkpoint**. Its final section says RTAB-Map is pending as of 19 Nov *when that document was written*; the later S02 report records the subsequent preliminary mapping work. Keep these dated milestones separate.
+
+## Scientific and repository conventions
+
+We distinguish **proposals**, **implemented interfaces**, **observed runtime behavior**, and **quantitative validated results**. Simulator GT is for scoring, not an input to the autonomous estimator. A unified map does not prove unknown-start relocalization. An object missing from view is not automatically removed.
+
+Raw bags, databases and large point clouds are local experiment outputs unless an explicit dataset release is prepared. Check and preserve existing uncommitted work before switching branches or staging files. The historical navigation baseline is tagged `echo-nav-v1`.
 
 ---
 
-*ECHO is a research prototype under active development.*
-
-**Verified navigation baseline:** `echo-nav-v1`
-
+*ECHO is an active research prototype. Reported capabilities and limitations apply to the specific tested milestones, not assumed downstream performance.*

@@ -1,0 +1,37 @@
+#usda 1.0
+(
+    metersPerUnit = 1
+    upAxis = "Z"
+    subLayers = [
+        @s01_d455_front_ros_depth_raw_verified.usda@
+    ]
+)
+
+over "World"
+{
+    over "Nova_Carter_ROS"
+    {
+        over "chassis_link"
+        {
+            over "sensors"
+            {
+                def Xform "echo_d455_rear" (
+                    prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/Sensors/Intel/RealSense/rsd455.usd@</Root>
+                )
+                {
+                    double3 xformOp:translate = (-0.1203, 0, 0.3439)
+                    float xformOp:rotateZ = 180
+                    uniform token[] xformOpOrder = [
+                        "xformOp:translate",
+                        "xformOp:rotateZ"
+                    ]
+
+                    over "RSD455"
+                    {
+                        bool physics:rigidBodyEnabled = 0
+                    }
+                }
+            }
+        }
+    }
+}

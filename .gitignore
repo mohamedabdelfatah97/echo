@@ -39,3 +39,8 @@ raafif_office_pre_recovery.usd
 # ECHO M04B generated diagnostics and recordings
 /diagnostics/
 /results/m04_ground_truth/
+
+# Generated S03 RTAB-Map experiment outputs
+/results/s03_dynamic_mapping/
+/results/s03_e1_mapping/
+/results/s03_four_mapping/

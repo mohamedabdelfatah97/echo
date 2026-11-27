@@ -1,0 +1,71 @@
+#usda 1.0
+(
+    metersPerUnit = 1
+    upAxis = "Z"
+    subLayers = [
+        @s01_d455_front_rear_hawk_replaced.usda@
+    ]
+)
+
+over "World"
+{
+    over "Nova_Carter_ROS"
+    {
+        over "chassis_link"
+        {
+            over "sensors"
+            {
+
+                over "left_hawk" (
+                    active = false
+                )
+                {
+                }
+
+                def Xform "echo_d455_left" (
+                    prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/Sensors/Intel/RealSense/rsd455.usd@</Root>
+                )
+                {
+                    double3 xformOp:translate = (-0.43043, 0.171, 0.3439)
+                    float xformOp:rotateZ = 90
+                    uniform token[] xformOpOrder = [
+                        "xformOp:translate",
+                        "xformOp:rotateZ"
+                    ]
+
+                    over "RSD455"
+                    {
+                        bool physics:rigidBodyEnabled = 0
+                        custom string isaac:nameOverride = "echo_d455_left_link"
+                    }
+                }
+
+
+                over "right_hawk" (
+                    active = false
+                )
+                {
+                }
+
+                def Xform "echo_d455_right" (
+                    prepend references = @https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/Sensors/Intel/RealSense/rsd455.usd@</Root>
+                )
+                {
+                    double3 xformOp:translate = (-0.28044, -0.171, 0.3439)
+                    float xformOp:rotateZ = -90
+                    uniform token[] xformOpOrder = [
+                        "xformOp:translate",
+                        "xformOp:rotateZ"
+                    ]
+
+                    over "RSD455"
+                    {
+                        bool physics:rigidBodyEnabled = 0
+                        custom string isaac:nameOverride = "echo_d455_right_link"
+                    }
+                }
+
+            }
+        }
+    }
+}
