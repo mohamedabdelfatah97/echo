@@ -88,7 +88,19 @@ def stop_groups(processes):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Read-only preflight; never starts processes")
+    parser.add_argument("--calibration", choices=("baseline", "coupled_xy"),
+                        default="baseline", help="Select S03 CameraInfo consumer mode")
     args = parser.parse_args()
+
+    # The historic depth-only experiment is incompatible with a coupled mode.
+    legacy = os.environ.get("ECHO_S03_DEPTH_CY_MODE", "baseline").strip().lower()
+    if legacy != "baseline":
+        parser.error("Set ECHO_S03_DEPTH_CY_MODE=baseline; use --calibration coupled_xy instead")
+    info_root = ("/echo/s03/calibration/coupled_xy" if args.calibration == "coupled_xy"
+                 else "/echo/cameras")
+    child_env = dict(os.environ, ECHO_S03_DEPTH_CY_MODE="baseline",
+                     ECHO_S03_CAMERA_INFO_ROOT=info_root)
+    print(f"[ECHO] Calibration: {args.calibration}; consumer CameraInfo root: {info_root}", flush=True)
 
     required = [
         ROOT / "scripts/start_full_warehouse_two_humans_four_d455.sh",
@@ -98,6 +110,9 @@ def main():
         ROOT / "launch/echo_s03_four_rgbd_sync_probe.launch.py",
         ROS_WS,
     ]
+    relay = ROOT / "scripts/echo_s03_coupled_xy_camera_info.py"
+    if args.calibration == "coupled_xy":
+        required.append(relay)
     missing = [str(path) for path in required if not path.is_file()]
     occupied = existing()
     print("[ECHO] Required files:", "OK" if not missing else "MISSING", flush=True)
@@ -135,7 +150,7 @@ def main():
         with log_file.open("w") as handle:
             proc = subprocess.Popen(
                 ros_command(argv), cwd=ROOT, stdout=handle,
-                stderr=subprocess.STDOUT, start_new_session=True,
+                stderr=subprocess.STDOUT, start_new_session=True, env=child_env,
             )
         processes.append((name, proc))
         print(f"[ECHO] Started {name}: PID/PGID {proc.pid}; log {log_file}", flush=True)
@@ -165,15 +180,19 @@ def main():
         ):
             start(name, ["bash", str(ROOT / "scripts" / filename)])
 
+        if args.calibration == "coupled_xy":
+            start("coupled_xy_info", ["python3", str(relay)])
+
         start("front_cloud", [
             "ros2", "run", "depth_image_proc", "point_cloud_xyz_node", "--ros-args",
             "-r", "__node:=echo_d455_front_depth_to_cloud",
             "-r", "image_rect:=/echo/cameras/front/depth/image_raw",
-            "-r", "camera_info:=/echo/cameras/front/depth/camera_info",
+            "-r", f"/echo/cameras/front/depth/camera_info:={info_root}/front/depth/camera_info",
             "-r", "points:=/echo/cameras/front/depth/points",
         ])
         time.sleep(2)
-        start("s03_sync", ["ros2", "launch", str(required[4])])
+        start("s03_sync", ["ros2", "launch", str(required[4]),
+                           f"camera_info_root:={info_root}"])
         print("[ECHO] Press Play in Isaac Sim. Ctrl+C stops only this managed stack.", flush=True)
         print(f"[ECHO] Logs: {logs}", flush=True)
         while not stopping:

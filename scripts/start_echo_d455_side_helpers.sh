@@ -3,6 +3,7 @@ source /opt/ros/jazzy/setup.bash
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+INFO_ROOT="${ECHO_S03_CAMERA_INFO_ROOT:-/echo/cameras}"
 PIDS=()
 
 cleanup() {
@@ -33,7 +34,7 @@ for side in left right; do
         --ros-args \
         -r __node:=echo_d455_${side}_depth_to_cloud \
         -r image_rect:=/echo/cameras/${side}/depth/image_raw \
-        -r camera_info:=/echo/cameras/${side}/depth/camera_info \
+        -r "/echo/cameras/${side}/depth/camera_info:=${INFO_ROOT}/${side}/depth/camera_info" \
         -r points:=/echo/cameras/${side}/depth/points &
     PIDS+=("$!")
 done

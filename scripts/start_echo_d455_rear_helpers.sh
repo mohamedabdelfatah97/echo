@@ -3,6 +3,7 @@ source /opt/ros/jazzy/setup.bash
 set -euo pipefail
 
 ROOT="$HOME/echo"
+INFO_ROOT="${ECHO_S03_CAMERA_INFO_ROOT:-/echo/cameras}"
 PIDS=()
 
 cleanup() {
@@ -34,7 +35,7 @@ ros2 run depth_image_proc point_cloud_xyz_node \
     --ros-args \
     -r __node:=echo_d455_rear_depth_to_cloud \
     -r image_rect:=/echo/cameras/rear/depth/image_raw \
-    -r camera_info:=/echo/cameras/rear/depth/camera_info \
+    -r "/echo/cameras/rear/depth/camera_info:=${INFO_ROOT}/rear/depth/camera_info" \
     -r points:=/echo/cameras/rear/depth/points &
 PIDS+=("$!")
 

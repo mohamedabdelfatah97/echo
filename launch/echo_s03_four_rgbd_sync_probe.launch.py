@@ -7,6 +7,8 @@ This is intentionally NOT a mapping launch.
 """
 
 from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 SIDES = ("front", "rear", "left", "right")
@@ -14,10 +16,12 @@ BASE = "/echo/cameras"
 PROBE = "/echo/s03"
 
 
-def generate_launch_description():
+def _nodes(context):
+    info_root = LaunchConfiguration("camera_info_root").perform(context)
     nodes = []
     for side in SIDES:
         prefix = f"{BASE}/{side}"
+        info_prefix = f"{info_root}/{side}"
         nodes.append(
             Node(
                 package="depth_image_proc",
@@ -27,8 +31,8 @@ def generate_launch_description():
                 parameters=[{"use_sim_time": True}],
                 remappings=[
                     ("depth/image_rect", f"{prefix}/depth/image_raw"),
-                    ("depth/camera_info", f"{prefix}/depth/camera_info"),
-                    ("rgb/camera_info", f"{prefix}/color/camera_info"),
+                    ("depth/camera_info", f"{info_prefix}/depth/camera_info"),
+                    ("rgb/camera_info", f"{info_prefix}/color/camera_info"),
                     (
                         "depth_registered/image_rect",
                         f"{PROBE}/{side}/depth_registered/image_rect",
@@ -53,7 +57,7 @@ def generate_launch_description():
                 ],
                 remappings=[
                     ("rgb/image", f"{prefix}/color/image_raw"),
-                    ("rgb/camera_info", f"{prefix}/color/camera_info"),
+                    ("rgb/camera_info", f"{info_prefix}/color/camera_info"),
                     (
                         "depth/image",
                         f"{PROBE}/{side}/depth_registered/image_rect",
@@ -88,4 +92,12 @@ def generate_launch_description():
         )
     )
 
-    return LaunchDescription(nodes)
+    return nodes
+
+
+def generate_launch_description():
+    return LaunchDescription([
+        DeclareLaunchArgument("camera_info_root", default_value=BASE,
+                              choices=[BASE, "/echo/s03/calibration/coupled_xy"]),
+        OpaqueFunction(function=_nodes),
+    ])
