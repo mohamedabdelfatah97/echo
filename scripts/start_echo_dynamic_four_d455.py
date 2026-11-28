@@ -90,6 +90,8 @@ def main():
     parser.add_argument("--check", action="store_true", help="Read-only preflight; never starts processes")
     parser.add_argument("--calibration", choices=("baseline", "coupled_xy"),
                         default="baseline", help="Select S03 CameraInfo consumer mode")
+    parser.add_argument("--agents", choices=("dynamic", "none"), default="dynamic",
+                        help="S04: existing IRA actors or clean warehouse")
     args = parser.parse_args()
 
     # The historic depth-only experiment is incompatible with a coupled mode.
@@ -99,7 +101,9 @@ def main():
     info_root = ("/echo/s03/calibration/coupled_xy" if args.calibration == "coupled_xy"
                  else "/echo/cameras")
     child_env = dict(os.environ, ECHO_S03_DEPTH_CY_MODE="baseline",
-                     ECHO_S03_CAMERA_INFO_ROOT=info_root)
+                     ECHO_S03_CAMERA_INFO_ROOT=info_root,
+                     ECHO_S04_AGENTS=args.agents)
+    print(f"[ECHO] Agent mode: {args.agents}", flush=True)
     print(f"[ECHO] Calibration: {args.calibration}; consumer CameraInfo root: {info_root}", flush=True)
 
     required = [

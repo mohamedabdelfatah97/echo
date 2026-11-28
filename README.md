@@ -1,5 +1,19 @@
 # ECHO
 
+<!-- ECHO_PHASE_D_20261128 -->
+## Current research checkpoint — 28 November 2026
+
+Phases A–C are complete at their defined engineering scope. Phase D (S04) experiments are complete at controlled engineering-pilot scope: bounded obstacle/stale-sensor response, static and dynamic acquisition, one/four RGB-D versus 3D LiDAR geometric comparison, corrected RTAB-Map replay and native trajectory evaluation. The next research phase is E / S05 (global relocalization and revisits). Phase G is the candidate original contribution: joint multi-view association, localization uncertainty, visibility evidence and multi-visit persistent object hypotheses. No novelty or physical-sensor accuracy claim is established yet.
+
+- [Phase D technical report](docs/ECHO_PHASE_D_CLOSEOUT_20261128.md)
+- [Current project context](docs/ECHO_PROJECT_CONTEXT_20261128.md)
+- [Updated roadmap](docs/ECHO_ROADMAP_20261128.md)
+- [Phase E handoff](docs/ECHO_PHASE_E_HANDOFF_20261128.md)
+
+The dated checkpoint supersedes older progress statements below; historical descriptions and demos are retained. Verify Git tag and archive status locally.
+<!-- /ECHO_PHASE_D_20261128 -->
+
+
 ### **E**nvironmental **C**hange and **H**istory of **O**bjects
 
 **Persistent 3D Object Memory, Multi-View Relocalization and Environmental Change Detection for Mobile Robots**

@@ -21,9 +21,14 @@ echo "=========================================="
 echo " ECHO — FOUR D455 DYNAMIC WAREHOUSE"
 echo "=========================================="
 echo " Main robot: White ROS Nova Carter"
-echo " NPC robots: 2 Red IRA Nova Carters"
-echo " Warehouse workers: 2"
-echo " NavMesh: Automatic bake"
+echo " Agent mode: ${ECHO_S04_AGENTS:-dynamic}"
+if [ "${ECHO_S04_AGENTS:-dynamic}" = none ]; then
+    echo " IRA actors: not spawned; NavMesh: skipped"
+else
+    echo " NPC robots: 2 Red IRA Nova Carters"
+    echo " Warehouse workers: 2"
+    echo " NavMesh: Automatic bake"
+fi
 echo " ROS 2: Jazzy / Fast DDS"
 echo "=========================================="
 
